@@ -8,6 +8,7 @@ const router = express.Router();
 router.post("/register", async (req, res) => {
   try {
     //generate new password
+    console.log(req.body);
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
@@ -22,6 +23,7 @@ router.post("/register", async (req, res) => {
     const user = await newUser.save();
     res.status(200).json(user);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
